@@ -1,0 +1,18 @@
+title: InfoSec Blog
+iconURL: assets/paybackgreenlogo.png
+theme: jekyll-theme-leaf
+
+# for a clean URL
+permalink: :slug
+
+social:
+  twitter: XDev05
+  github: XDev05
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
+
+### comments & analytics
+hyvor_talk_website_id: 766
+google_analytics: UA-NNNNNNNN-N
