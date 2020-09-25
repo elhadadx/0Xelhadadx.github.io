@@ -13,7 +13,7 @@ published: true
 * find files which contains **ftp credentials**
 * download files from ftp
 * Gobuster in another dir give us **adminer.php**.
-* Exploit Adminer DB.
+* Adminer DB Exploit lead to read local files.
 * Got User
 * PYTHONPATH Hijacking 
 * Got Root.
