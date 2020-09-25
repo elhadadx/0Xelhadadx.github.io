@@ -26,7 +26,7 @@ published: true
 * 21 --> ftp
 * 80 --> https
 
-> **nmap -sC -sV -Pn -oA scan.txt 10.10.10.187**
+> **nmap -sC -sV -Pn -oN scan.txt 10.10.10.187**
 
 ```ruby
 
