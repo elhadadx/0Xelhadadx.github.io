@@ -24,7 +24,7 @@ published: true
 * as always, i’ll do nmap scan to find out which services running in this machine, in this machine i found 3 opened ports.
 * 22 --> ssh
 * 21 --> ftp
-* 80 --> https
+* 80 --> http
 
 > **nmap -sC -sV -Pn -oN scan.txt 10.10.10.187**
 
