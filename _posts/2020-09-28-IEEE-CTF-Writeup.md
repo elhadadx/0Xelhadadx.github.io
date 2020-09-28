@@ -79,7 +79,7 @@ published: true
 
 * Login successful!
 
-> **Flag: IEEE{o_Uns3cure}**
+> **Flag: IEEE{so_Uns3cure}**
 
 # []()3.warm up
 
