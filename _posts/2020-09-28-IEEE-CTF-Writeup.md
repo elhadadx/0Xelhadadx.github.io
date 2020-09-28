@@ -31,7 +31,7 @@ published: true
 
 > now we need to check all of them with **exiftool**
 
-> **exiftool ***
+* exiftool * 
 
 ![](https://i.ibb.co/hmvppZq/comment.png)
 
@@ -81,6 +81,41 @@ published: true
 
 > **Flag: IEEE{o_Uns3cure}**
 
+# []()3.warm up
+
+![](https://i.ibb.co/Gs7wTpX/warmup.png)
+
+> **we hava base64 hash and when we decrypt it i got another md5 hash, but we need to fix the hash as mensioned in the description of the challenge.**
+
+![](https://i.ibb.co/RC3vzM6/base64.png)
+
+* after analyse this hash i optain that this a hex value from **a-f** so we need to delete the char **h** and **z** to get the right md5 hash
+
+> **Flase md5 hash: 482c811dha5d5b4bc6d497ffa98491ze38**
+
+> **Correct md5 hash: 482c811da5d5b4bc6d497ffa98491e38**
+
+![](https://i.ibb.co/mD1VSgB/flagmd5.png)
+
+> **Flag: IEEE{password123}
+
+# []()4.Brute Me
+
+![](https://i.ibb.co/hLRVjM1/bruteme.png)
+
+* You can download the file from [here](https://filebin.net/3z6ni0dvk2oj9rdn/flag.zip?t=55c8jhxy)
+
+> i just cracked tha password and got the flag.
+
+> **fcrackzip -u -v -D -p /usr/share/wordlists/rockyou.txt flag.zip**
+
+* **Password: sainsburys**
+
+![](https://i.ibb.co/C7kzNYk/brute-flag.png)
+
+> **Flag: IEEE{Easy_Brute}**
+
+* nice!, we are done from the Misc now, let's go to the Web now.
 
 
 
