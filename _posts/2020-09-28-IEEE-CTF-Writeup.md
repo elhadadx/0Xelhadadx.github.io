@@ -7,7 +7,7 @@ published: true
 
 > **hello friends, this is My writeup for IEEE CTF Misc && RE && Forensics writeup**.
 
-# []() Foreniscs Challenges Writeup
+# []() Foreniscs
 
 ![easy](https://i.ibb.co/MsX3xL7/easy.png)
 
@@ -31,7 +31,7 @@ published: true
 
 > now we need to check all of them with **exiftool**
 
-> **exiftool * **
+> **exiftool ***
 
 ![](https://i.ibb.co/hmvppZq/comment.png)
 
@@ -44,6 +44,43 @@ published: true
 ![](https://i.ibb.co/0tmLsbn/flag.png)
 
 > **Flag: IEEE{THSISTHEFLGGDJB}**
+
+# []() Misc Challenges
+
+# []()1.Caesar salad
+
+![](https://i.ibb.co/XtnxwQR/easy.png)
+
+> **from the challenge name i thought that this a Caesat Cipher but it was, Rail Fence Cipher, i tried all the Ciphers in this website til i got the flag.**
+
+* use this [website](https://cryptii.com/pipes/caesar-cipher) to decrypt the string.
+
+![](https://i.ibb.co/fqxbJpq/flag1.png)
+
+> **Flag: IEEE{CaesarAintH4rd}
+
+# []()2.Uns3cure
+
+![](https://i.ibb.co/vYPJgGX/unsecure.png)
+
+> we got a pcap file and i opened it with wireshark and it's so easy to find the plaintext password, you can download the file from [here](https://filebin.net/3z6ni0dvk2oj9rdn/unsecure.pcap?t=3muyooly)
+
+* open wireshark and look carefully with me
+
+![](https://i.ibb.co/x5QrKSB/packet.png)
+
+> **in this packet we can see that there is someone tell anotherone to login with ssh to make something.**
+
+![](https://i.ibb.co/gghRpbQ/flag.png)
+
+> **in this packet we found a plaintext with the same name of the challenge and we can confirm that this is the right password from the next packet.**
+
+![](https://i.ibb.co/9NhBs0Y/loggedin.png)
+
+* Login successful!
+
+> **Flag: IEEE{o_Uns3cure}**
+
 
 
 
