@@ -1,11 +1,11 @@
 ---
-title: IEEE CTF Challenges Writeup 
+title: IEEE Olympics CTF Challenges Writeup 
 published: true
 ---
 
 ![logo](https://i.ibb.co/YPR3X9G/logo.png)
 
-> **hello friends, this is My writeup for IEEE CTF Misc && RE && Forensics writeup**.
+> **hello friends, this is My writeup for IEEE CTF Misc & RE & Forensics & Web writeups**.
 
 # []() Foreniscs
 
