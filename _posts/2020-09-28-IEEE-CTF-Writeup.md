@@ -91,7 +91,7 @@ published: true
 
 * after analyse this hash i optain that this a hex value from **a-f** so we need to delete the char **h** and **z** to get the right md5 hash
 
-> **Flase md5 hash: 482c811dha5d5b4bc6d497ffa98491ze38**
+> **False md5 hash: 482c811dha5d5b4bc6d497ffa98491ze38**
 
 > **Correct md5 hash: 482c811da5d5b4bc6d497ffa98491e38**
 
