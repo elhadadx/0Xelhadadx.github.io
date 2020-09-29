@@ -265,7 +265,220 @@ with open("final.txt", 'w') as f:
 
 [![Video](https://i.ibb.co/b34MSPJ/secure.png)](https://www.youtube.com/watch?v=ktoYt_myWBI&t=2s)
 
+# []() Reverse Challenges
+
+# []()1.Dot Free
+
+![](https://i.ibb.co/8sNXzNR/dotfree.png)
+
+> **You can download the program from here [rev.exe](https://filebin.net/11vifdnxstdrcjwq/r3v.exe?t=plxeqb1z)
+
+* **Running the application it asks for an input**
+
+![](https://i.ibb.co/wK3GxjZ/ask.png)
+
+> **So let's use dnspy to decompile and see the code.**
+
+![](https://i.ibb.co/QK95VdC/decom.png)
+
+> **Flag: IEEE{Free_Points_4_u}**
+
+# []()2.Trivia fun
+
+![](https://i.ibb.co/SBXhJmx/triv.png)
+
+> **You can download the program from here [trivia.exe](https://filebin.net/11vifdnxstdrcjwq/Trivia.exe?t=9p0zlpvv)
+
+* **It’s a multistep challenge which is quite fun.**
+
+> **The first one is asking for a username and password.**
+
+![](https://i.ibb.co/YBQk4BS/triviafun.png)
+
+> **It’s .NET so let’s use dnspy to get them.**
+
+* After looking at the source code i realised that the application has anti **debugging techniques** which is implemented in all of these classes **Program, Question, Trivia_Form**
+
+![](https://i.ibb.co/fpBXY8v/dnspy.png)
+
+* Which simply checks if a debugger is attached or if dnspy is running if so it simply doesn’t continue executing, so let’s remove these pieces of code to make it easier for us later on.
+
+> **remove the code by right clicking and then edit the class then just remove the anti debugging code and compile and save**
+
+#### []()First step:
+
+> **Now we can solve the first step which is the username and password, which the code responsible for validating them is in Trivia_Form.**
+
+![](https://i.ibb.co/2MVJ4jp/firststep.png)
+
+* So it checks if the username matches this regex [^([A-Z0-9]{5}-){4}[A-Z0-9]{5}$] you can use this [site](https://regex101.com/) understand this regex,and it checks if the sum of the password ascii values = 1930.
+
+> **Username = AAAAA-AAAAA-AAAAA-AAAAA-AAAAA,  which matches the regex.**
+>
+> **Password: zzzzzzzzzzzzzzzd,  their sum of the ascii value = 1930**
+
+#### []()Seconed step:
+
+![](https://i.ibb.co/DM8MR6B/seconed.png)
+
+> **Solving the second step, which is the code responsible for validating the answer is in Qs_l1.**
+
+![](https://i.ibb.co/PzddTWd/seco.png)
+
+> **Let’s write a script to bruteforce the answer:**
+
+```ruby
+
+import string
+enc = "Gu4g_J0hyq_o3_Mn_Z4GpU"
+alpha = string.ascii_letters
+ans = ""
+i = 0
+while(i<22):
+  if((ord(enc[i])>= 97 and ord(enc[i])<= 122) or (ord(enc[i])>= 65 and ord(enc[i])<= 90)):
+    for c in alpha:
+      if (ord(c)>= 97 and ord(c)<= 122):
+        if (ord(c) > 109):
+          if(chr(ord(c) - 13) == enc[i]):
+            ans += c
+            break
+        else:
+            if(chr(ord(c) + 13) == enc[i]):
+              ans += c
+              break
+      elif (ord(c)>= 65 and ord(c)<= 90):
+        if (ord(c) > 77):
+          if(chr(ord(c) - 13) == enc[i]):
+            ans += c
+            break
+        else:
+          if(chr(ord(c) + 13) == enc[i]):
+            ans += c
+            break
+  else:
+    ans+=enc[i]
+  i+=1
+print(ans)
+
+```
+
+> **The answer is: Th4t_W0uld_b3_Za_M4TcH**
+
+#### []()Third step:
+
+![](https://i.ibb.co/Ttnbyb1/third.png)
+
+> **Solving the second step, which is the code responsible for validating the answer is located in Qs_l2.**
+
+![](https://i.ibb.co/9w3qq8C/thirrdpic.png)
+
+> **Let’s try to break it to understand it better.**
+
+![](https://i.ibb.co/3TsfNST/break.png)
+
+> **It just makes sure that the answer length is divisible by 3 and then divides it into 3 different arrays after converting them to their ascii equivalent.**
+
+![](https://i.ibb.co/F5xxGzg/convert.png)
+
+> **Create the xor key by shifting with different values.**
+
+![](https://i.ibb.co/VjT7TNz/xor.png)
+
+> Xor the answer with the keys and adding some values after.then concatenate all of them and compare it with: **X5Q;DU~<{6p`87)[`ad1.**
+
+* So to understand it better let’s say if:
+1.enc = answer ^ key + value
+2.Then: answer = (enc - value) ^ key
+
+> **Let’s write a script to get the answer**
+
+```ruby
+
+using System;
+using System.Linq;
+class Trivia {
+    int[] convert_carr_iarr(char[] carr)
+		{
+			int[] array = new int[carr.Length];
+			for (int i = 0; i < carr.Length; i++)
+			{
+				array[i] = (int)carr[i];
+			}
+			return array;
+		}
+	char[] convert_iarr_carr(int[] carr)
+		{
+			char[] array = new char[carr.Length];
+			for (int i = 0; i < carr.Length; i++)
+			{
+				array[i] = (char)carr[i];
+			}
+			return array;
+		}
+ 
+	public string get_answer(string answer)
+	{
+		while (answer.Length % 3 != 0)
+		{
+			answer += "=";
+		}
+		int[] array;
+		int[] array2;
+		int[] array3;
+		array = this.convert_carr_iarr(answer.Substring(0, answer.Length / 3).ToCharArray());
+		array2 = this.convert_carr_iarr(answer.Substring(answer.Length / 3, answer.Length / 3).ToCharArray());
+		array3 = this.convert_carr_iarr(answer.Substring(2 * answer.Length / 3, answer.Length / 3).ToCharArray());
+		int[] array4 = new int["Z09CWQl".Length];
+		int[] array5 = new int["Z09CWQl".Length];
+		int[] array6 = new int["Z09CWQl".Length];
+		for (int i = 0; i < "Z09CWQl".Length; i++)
+		{
+			int num = (int)"Z09CWQl"[i];
+			array4[i] = num >> 3;
+			array5[i] = num >> 4;
+			array6[i] = num >> 2;
+		}
+		for (int j = 0; j < array.Length; j++)
+		{
+			array[j] ^= array4[j];
+		}
+		for (int k = 0; k < array2.Length; k++)
+		{
+			array2[k] = ((array2[k]-6) ^ array5[k]);
+		}
+		for (int l = 0; l < array3.Length; l++)
+		{
+			array3[l] = ((array3[l]-8) ^ array6[l]);
+		}
+		return string.Join<char>("", this.convert_iarr_carr(array).ToList<char>().Concat(this.convert_iarr_carr(array2).ToList<char>()).Concat(this.convert_iarr_carr(array3).ToList<char>()));
+	}
+  public static void Main() {
+      string enc_answer = "X5Q;DU~<{6p`87)[`ad1.";
+      Trivia h = new Trivia();
+      string ans = h.get_answer(enc_answer);
+      Console.WriteLine(ans);
+ 
+  }
+}
+
+```
+
+> **The answer is: S3V3N_s3v3n_777_VII==**
+
+![](https://i.ibb.co/DzY1kbY/welldone.png)
+
+> **After solving all the questions it says to look at the code so let’s check the code.**
+
+![](https://i.ibb.co/QbkqT28/bb.png)
+
+> **So it decrypts 'whoami' so let's create a breakpoint and check what does it return.**
+
+![](https://i.ibb.co/SdTw3Fx/whoami.png)
+
+> **Just set a breakpoint before returning to get the result value.**
+
+![](https://i.ibb.co/CQCFxH5/result.png)
+
+> **Flag: Flag{To_P4tch_0r_Not_To_P4tch}**
+
 * Cheers!
-
-
-
