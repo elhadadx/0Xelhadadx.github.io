@@ -185,7 +185,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 
 ![](https://i.ibb.co/tsPFbgS/adminflag.png)
 
-> **Flag: IEEE{wh0 473 my c00k13?} **
+> **Flag: IEEE{wh0 473 my c00k13?}**
 
 # []()2.S3cure uploader 
 
@@ -271,7 +271,7 @@ with open("final.txt", 'w') as f:
 
 ![](https://i.ibb.co/8sNXzNR/dotfree.png)
 
-> **You can download the program from here [rev.exe](https://filebin.net/11vifdnxstdrcjwq/r3v.exe?t=plxeqb1z)
+> **You can download the program from here [rev.exe](https://filebin.net/11vifdnxstdrcjwq/r3v.exe?t=plxeqb1z)**
 
 * **Running the application it asks for an input**
 
@@ -287,7 +287,7 @@ with open("final.txt", 'w') as f:
 
 ![](https://i.ibb.co/SBXhJmx/triv.png)
 
-> **You can download the program from here [trivia.exe](https://filebin.net/11vifdnxstdrcjwq/Trivia.exe?t=9p0zlpvv)
+> **You can download the program from here [trivia.exe](https://filebin.net/11vifdnxstdrcjwq/Trivia.exe?t=9p0zlpvv)**
 
 * **It’s a multistep challenge which is quite fun.**
 
