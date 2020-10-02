@@ -8,7 +8,7 @@ published: true
 # []()Methodology
 
 * smb anonymous login
-* enum **profile$** share
+* enum **profiles$** share
 * Generating **TGT** for a valid user
 * rpcclient login
 * enum privileges && change **audit2020** password
