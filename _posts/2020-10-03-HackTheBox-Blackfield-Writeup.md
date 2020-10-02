@@ -1,6 +1,6 @@
 ---
 title: HackTheBox Blackfield Writeup
-published: true
+published: false
 ---
 
 ![](https://i.ibb.co/bPJypM8/logo.png)
