@@ -582,7 +582,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
 
 > as we no this is AD machine so we will backup the NTDS.dit file and the registry file system.
 
-_The Ntds.dit file is a database that stores Active Directory data, including information about user objects, groups, and group membership. It includes the password hashes for all users in the domain.
+*The Ntds.dit file is a database that stores Active Directory data, including information about user objects, groups, and group membership. It includes the password hashes for all users in the domain.
 
 * afte some google search i go accross this pdf file [show me your privileges and I will lead you to SYSTEM](https://hackinparis.com/data/slides/2019/talks/HIP2019-Andrea_Pierini-Whoami_Priv_Show_Me_Your_Privileges_And_I_Will_Lead_You_To_System.pdf)
 
