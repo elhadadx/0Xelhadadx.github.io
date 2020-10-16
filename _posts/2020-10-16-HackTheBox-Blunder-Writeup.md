@@ -1,5 +1,5 @@
 ---
-title: HackTheBox Bluner Writeup
+title: HackTheBox Blunder Writeup
 published: true
 ---
 
