@@ -10,7 +10,7 @@ published: true
 * nmap scan
 * LFI Lead to read tomcat user credentials
 * exploitation by Metasploit
-* crack zip file fcrackzip 
+* crack zip file by fcrackzip 
 * own user
 * Privilege Escalation
 
@@ -72,5 +72,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 ![](https://i.ibb.co/xfR6Rjq/user-data.png)
 
+* username:**tomcat**
+* password:**$3cureP4s5w0rd123!**
+
 > now we have the credentials, let's use metasploit now to exploit this service.
+
+# []() Exploitation Part
+
 
