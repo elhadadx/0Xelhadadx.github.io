@@ -11,7 +11,7 @@ published: true
 * LFI Lead to read tomcat user credentials
 * exploitation by Metasploit
 * crack zip file by fcrackzip 
-* own user
+* user part
 * Privilege Escalation
 
 # []()Nmap Scan
