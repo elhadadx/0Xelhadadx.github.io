@@ -16,7 +16,7 @@ published: false
 
 # []()Nmap Scan
 
-> as always, i’ll do nmap scan to find out which services running in this machine.
+> **as always, i’ll do nmap scan to find out which services running in this machine.**
 
 * 8080 for apache tomcat
 
@@ -42,19 +42,19 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 ```
 
-> let's check the web page now.
+> **let's check the web page now.**
 
 ![](https://i.ibb.co/b5RHnQj/webpage-mega.png)
 
-> after looking at the source code i found the way to exploit LFI, let's see how.
+> **after looking at the source code i found the way to exploit LFI, let's see how.**
 
 ![](https://i.ibb.co/BNg7ZrK/lfi-param.png)
 
 # []() LFI Part
 
-* from the source code i've found the url: http://megahosting.htb/news.php?file=
+* **from the source code i've found the url: http://megahosting.htb/news.php?file=**
 
-> the file parameter was vulnerable to LFI, let's check it.
+> **the file parameter was vulnerable to LFI, let's check it.**
 
 ![](https://i.ibb.co/qNY5mWv/lfi-done.png)
 
@@ -68,14 +68,14 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 * if you are a linux user you will know that without any blogs because any program data will be found at **/usr/share**
 
-> here is the credentials for apache tomcat server.
+> **here is the credentials for apache tomcat server.**
 
 ![](https://i.ibb.co/xfR6Rjq/user-data.png)
 
 * username:**tomcat**
 * password:**$3cureP4s5w0rd123!**
 
-> now we have the credentials, now the exploitation part will be done with 2 ways.
+> **now we have the credentials, now the exploitation part will be done with 2 ways.**
 
 # []() Exploitation Part
 
@@ -97,19 +97,19 @@ OK - Deployed application at context path [/xdev0.war]
 ╭─
 
 ```
-> let's start nc listener now and open this link http://10.10.10.194:8080/xdev0.war/.
+> **let's start nc listener now and open this link http://10.10.10.194:8080/xdev0.war.**
 
 ![](https://i.ibb.co/pytCy44/nc.png)
 
 * nice!
 
-> in this point you can use metasploit too.
+> **in this point you can use metasploit too.**
 
 ![](https://i.ibb.co/r3rWxQj/metasploit.png)
 
 # []()USER Part
 
-> after some enumeration, I've found a compressed backup file and after cracking this file I used its password to escalate my privilege to the user privileges.
+> **after some enumeration, I've found a compressed backup file and after cracking this file I used its password to escalate my privilege to the user privileges.**
 
 * here is the backup file
 
@@ -140,7 +140,7 @@ id
 uid=1000(ash) gid=1000(ash) groups=1000(ash),4(adm),24(cdrom),30(dip),46(plugdev),116(lxd)
 
 ```
-> from this [Blog](https://www.hackingarticles.in/lxd-privilege-escalation/) i know the way to escalate my privileges to root privilege.
+> **from this [Blog](https://www.hackingarticles.in/lxd-privilege-escalation/) i know the way to escalate my privileges to root privilege.**
 
 1. **Steps to be performed on the attacker machine.**
 
@@ -172,7 +172,7 @@ alpine-v3.12-x86_64-20201106_1805.tar.gz  build-alpine  LICENSE  README.md
 
 ```
 
-> let's start a python server and upload the image to the Tabby machine
+> **let's start a python server and upload the image to the Tabby machine**
 
 ![](https://i.ibb.co/NYBx9dG/lxd-upload.png)
 
