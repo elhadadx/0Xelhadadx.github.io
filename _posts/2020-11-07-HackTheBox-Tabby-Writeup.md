@@ -1,6 +1,6 @@
 ---
 title: HackTheBox Tabby Writeup
-published: false
+published: true
 ---
 
 ![](https://i.ibb.co/mBPb1hs/logo.png)
