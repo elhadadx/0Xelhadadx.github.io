@@ -182,7 +182,7 @@ alpine-v3.12-x86_64-20201106_1805.tar.gz  build-alpine  LICENSE  README.md
 
 ![](https://i.ibb.co/kHqxxx4/image-lxc.png)
 
-> **lxc init devil ignite -c security.privileged=true
+> **lxc init devil ignite -c security.privileged=true**
 
 > **lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true**
 
