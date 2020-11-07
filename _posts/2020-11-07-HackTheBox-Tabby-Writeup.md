@@ -9,7 +9,7 @@ published: true
 
 * nmap scan
 * LFI Lead to read tomcat user credentials
-* exploitation by Metasploit
+* exploitation Part
 * crack zip file by fcrackzip 
 * user part
 * Privilege Escalation
