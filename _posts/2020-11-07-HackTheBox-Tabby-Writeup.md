@@ -192,7 +192,7 @@ alpine-v3.12-x86_64-20201106_1805.tar.gz  build-alpine  LICENSE  README.md
 
 ![](https://i.ibb.co/QrGJ4st/root-part.png)
 
-> root flag
+> **root flag**
 
 ```ruby
 
