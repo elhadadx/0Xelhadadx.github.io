@@ -75,11 +75,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 * username:**tomcat**
 * password:**$3cureP4s5w0rd123!**
 
-> now we have the credentials, let's use metasploit now to exploit this service.
+> now we have the credentials, now the exploitation part will be done with 2 ways.
 
 # []() Exploitation Part
 
-> exploitation part was very easy, we need a **wat** format backdoor to upload to the server and start deploying it to get a reverse shell.
+> exploitation part was very easy, we need a **war** format backdoor to upload to the server and start deploying it to get a reverse shell.
 
 * let's generate a war file with **msfvenom**.
 
