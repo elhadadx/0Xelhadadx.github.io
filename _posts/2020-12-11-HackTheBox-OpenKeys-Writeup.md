@@ -136,7 +136,7 @@ openkeys$
 
 > in this point we will use CVE-2019-19520 or CVE-2019-19522 to gain **auth group** permissions.
 
-> **follow this blog [](https://packetstormsecurity.com/files/155572/Qualys-Security-Advisory-OpenBSD-Authentication-Bypass-Privilege-Escalation.html) or Upload this [script](https://raw.githubusercontent.com/bcoles/local-exploits/master/CVE-2019-19520/openbsd-authroot) to the machine and run it.**
+> **follow this [Blog](https://packetstormsecurity.com/files/155572/Qualys-Security-Advisory-OpenBSD-Authentication-Bypass-Privilege-Escalation.html) or Upload this [script](https://raw.githubusercontent.com/bcoles/local-exploits/master/CVE-2019-19520/openbsd-authroot) to the machine and run it.**
 
 
 ```ruby
