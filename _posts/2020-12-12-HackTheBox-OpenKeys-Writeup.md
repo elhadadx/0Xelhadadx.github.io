@@ -1,6 +1,6 @@
 ---
 title: HackTheBox OpenKeys Writeup
-published: false
+published: true
 ---
 
 ![logo](https://i.ibb.co/sg3rfZ2/logo.png)
