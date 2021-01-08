@@ -92,5 +92,44 @@ net user administrator _1nt3rn37ofTh1nGz
 
 > **let's login to the web appliaction now with user credentials.**
 
+![proccess](https://i.ibb.co/vPtR6RM/app-pcs.png)
+
+> **there is a Proccesses tap and we can run commands from it**.
+
+> **let's get a reverse shell now.**
+
+![](https://i.ibb.co/6tqrHhs/app-whoami.png)
+
+> **let's check our user.txt**
+
+![](https://i.ibb.co/vh36BgH/user.png)
+
+> **this file encrypted by PSCredential** so we need to decrypt it.
+
+* **follow this [blog](https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/exporting-and-importing-credentials-in-powershell)**.
+
+> **$userflag = Import-Clixml -path user.txt**
+
+> **$userflag.getnetworkcredential().password**
+
+![](https://i.ibb.co/FWgKNYv/user-flag.png)
+
+* **user flag done.**
+
+# []()Privilege Escalation
+
+> **open the web appliaction and login with administrator credentials and do the same steps.**
+
+> **$adminflag = Import-Clixml -pat root.txt**
+
+> **$adminflag.getnetworkcredential().password**
+
+![](https://i.ibb.co/HTJBJGY/adminflag.png)
+
+* cheers!
+
+> **Thanks for reading.**
+
+ <script src="https://www.hackthebox.eu/badge/103789"></script>
 
 
