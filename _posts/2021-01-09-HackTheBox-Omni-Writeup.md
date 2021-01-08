@@ -1,5 +1,5 @@
 ---
-title: HackTheBox Omni Writwup
+title: HackTheBox Omni Writeup
 published: true
 ---
 
