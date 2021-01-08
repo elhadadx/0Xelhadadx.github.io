@@ -1,6 +1,6 @@
 ---
 title: HackTheBox Omni Writeup
-published: true
+published: false
 ---
 
 ![logo](https://i.ibb.co/WsG6YNc/logo.png)
