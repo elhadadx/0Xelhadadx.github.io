@@ -100,3 +100,72 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 * **nice!, we got a reverse shell now.**
 
+# []()Privilege Escalation
+
+> **after some eumeration i foudn the password of the user bill in /var/backups**
+
+![](https://i.ibb.co/zQJw7YS/cat-comm.png)
+
+![](https://i.ibb.co/pZgZn07/bill-pass.png)
+
+* **let's crack the password now.**
+
+> **sudo john --wordlist=/usr/share/wordlists/rockyou.txt pass**
+
+![](https://i.ibb.co/CHt410K/pass-cracked.png)
+
+
+> **when you try sudo -l you will see that it's request Verification code.**
+
+![](https://i.ibb.co/93H4Hsy/verify.png)
+
+> **there is a hidden file in home directory of bill which contain a secret token of google authenticator**.
+
+![](https://i.ibb.co/1b18YVs/google-auth.png)
+
+> **so we need to add the google authnticator [GAuth addon](https://chrome.google.com/webstore/detail/gauth-authenticator/ilgcnhelpchnceeipipijaljkblbcobl?hl=en) to google chrome and put the secret token in it and it will generate the OTP for us.**
+
+![](https://i.ibb.co/PZ0CFYh/google-auth-add.png)
+
+* **and here's the OTP**
+
+![](https://i.ibb.co/k0pxQht/otp.png)
+
+> **let's check "sudo -l" again**.
+
+![](https://i.ibb.co/jkqsHQc/operation-not-per.png)
+
+> **in this part i spend a day to identify my mistake but i didn't find anything until my friend told me this machine is all about sync.**
+
+* **let's check the time and the date.**
+
+![](https://i.ibb.co/rc1bfjz/timedatectl.png)
+
+> **it's different date and time from my local date and time, so we need to change it.**
+
+![](https://i.ibb.co/ggJ2g4Q/time-zone-change.png)
+
+* **let' check again**
+
+![](https://i.ibb.co/94QxWM0/bill-gem.png)
+
+> **nice!, we will use gem command to get root ,let's open gtfobins now.**
+
+![](https://i.ibb.co/FHpdq3F/gem-gtfobins.png)
+
+> **sudo gem open -e "/bin/sh -c /bin/sh" rdoc**
+
+![](https://i.ibb.co/q0dGffv/rooted.png)
+
+* **rooted**
+
+* **Thanks For Reading**
+
+* **cheers!**
+
+ <script src="https://www.hackthebox.eu/badge/103789"></script>
+
+
+
+
+
