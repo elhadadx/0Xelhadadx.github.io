@@ -1,6 +1,6 @@
 ---
 title: HackTheBox Jewel Writeup
-published: true
+published: false
 ---
 
 ![](https://i.ibb.co/Q9tCD1K/logo.png)
