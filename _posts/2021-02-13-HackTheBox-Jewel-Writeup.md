@@ -100,6 +100,3 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 * **nice!, we got a reverse shell now.**
 
-
-
-
