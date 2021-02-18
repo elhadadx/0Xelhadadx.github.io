@@ -1,4 +1,4 @@
-title: XDEV05 BLOG
+title: elhadadx BLOG
 iconURL: assets/paybackgreenlogo.png
 theme: jekyll-theme-leaf
 
@@ -6,8 +6,8 @@ theme: jekyll-theme-leaf
 permalink: :slug
 
 social:
-  twitter: XDev05
-  github: XDev05
+  twitter: elhadadx
+  github: 
 
 plugins:
  - jekyll-feed
