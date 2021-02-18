@@ -7,7 +7,7 @@ layout: page
 
 > You can always contact me via [Twitter](https://twitter.com/XDev05).
 
-> Subscribe in my channel [Youtube](https://www.youtube.com/channel/UC3VGhl_MyVroYv10viFKLnA?view_as=subscriber)
+> Subscribe in my channel [Youtube]()
 
 > ask questions on [Facebook](https://www.facebook.com/XDev05).
 
